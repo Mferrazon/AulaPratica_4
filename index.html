@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- A tag mais importante para o design responsivo. Ela diz ao navegador para usar a largura do dispositivo. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leonardo da Vinci - Responsivo</title>
     <style>
@@ -16,10 +15,10 @@
             background-color: #FDFDFD;
         }
 
-        img {
-            max-width: 100%; /* Garante que as imagens nunca "vazem" do seu container */
+        img {/*configura imagens*/
+            max-width: 100%; 
             height: auto;
-            display: block; /* Remove espaços extras que podem aparecer embaixo das imagens */
+            display: block; 
         }
 
         h1, h2, h3 {
@@ -27,7 +26,6 @@
         }
 
         /* --- CONTAINER PRINCIPAL E CABEÇALHO/RODAPÉ --- */
-        /* Vamos unificar o estilo do cabeçalho e rodapé aqui */
         .secao-colorida {
             background-color: #506E6A;
             color: white;
@@ -42,12 +40,12 @@
         }
 
         .menu-nav ul {
-            /* A MÁGICA DO FLEXBOX: Substituímos o 'float' antigo. */
-            display: flex;          /* Transforma a lista em um container flexível. */
-            flex-wrap: wrap;        /* Permite que os itens quebrem para a linha de baixo se não couberem. */
-            justify-content: center;/* Centraliza os itens do menu. */
-            gap: 1rem;              /* Cria um espaço consistente entre os itens. */
-            list-style-type: none;  /* Remove as bolinhas da lista. */
+         
+            display: flex;          
+            flex-wrap: wrap;       
+            justify-content: center;
+            gap: 1rem;              
+            list-style-type: none;  
             padding: 0;
         }
 
@@ -56,9 +54,9 @@
             padding: 8px 16px;
             border: 1px solid #506E6A;
             color: #506E6A;
-            display: block; /* Garante que o link ocupe todo o espaço do 'li' */
-            border-radius: 4px; /* Bordas arredondadas para um visual mais suave */
-            transition: all 0.3s ease; /* Efeito de transição suave */
+            display: block;
+            border-radius: 4px; 
+            transition: all 0.3s ease; 
         }
 
         .menu-nav a:hover {
@@ -66,21 +64,21 @@
             color: white;
         }
 
-        /* --- CONTEÚDO PRINCIPAL (A GRADE) --- */
+        /* --- CONTEÚDO PRINCIPAL --- */
         .container-conteudo {
             display: grid;
-            /* Definimos explicitamente uma grade de 12 colunas. Cada '1fr' é uma fração igual do espaço. */
+         
             grid-template-columns: repeat(12, 1fr);
-            gap: 2rem; /* Espaço entre as colunas e linhas da grade. */
+            gap: 2rem;
             padding: 2rem;
-            max-width: 1200px; /* Limita a largura máxima em telas muito grandes para melhor leitura. */
-            margin: 0 auto;    /* Centraliza o container na página. */
+            max-width: 1200px; 
+            margin: 0 auto;   
         }
 
         .imagem_leo {
-            /* Em telas grandes, a imagem ocupa da coluna 1 até a 5. */
+         
             grid-column: 1 / span 4;
-            text-align: center; /* Centraliza o conteúdo dentro da coluna da imagem */
+            text-align: center; 
         }
         
         .infos {
@@ -96,26 +94,25 @@
         }
 
         .principal {
-            /* Em telas grandes, o texto ocupa da coluna 5 até a última (-1). */
+        
             grid-column: 5 / -1;
             text-align: justify;
-            line-height: 1.7; /* Melhora a legibilidade do texto. */
+            line-height: 1.7; 
         }
 
-        /* --- A MÁGICA DA RESPONSIVIDADE --- */
-        /* Esta regra só se aplica a telas com largura MÁXIMA de 768px (tablets e celulares). */
+        
+        /* Esta regra só se aplica a telas com largura MÁXIMA de 768px */
         @media only screen and (max-width: 768px) {
             
             .container-conteudo {
-                /* MUDANÇA CRÍTICA: A grade agora tem apenas UMA coluna. */
+              
                 grid-template-columns: 1fr;
-                padding: 1rem; /* Diminui o espaçamento em telas menores */
+                padding: 1rem; 
             }
 
             .imagem_leo,
             .principal {
-                /* MUDANÇA CRÍTICA: Dizemos para ambos os itens ocuparem a grade inteira (a única coluna que existe). */
-                /* Isso faz com que eles se empilhem verticalmente. */
+               
                 grid-column: 1 / -1;
             }
         }

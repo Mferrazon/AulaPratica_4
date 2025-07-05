@@ -1,200 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Obras de Leonardo da Vinci - Responsivo</title>
     <style>
-        .container {
-            display: grid;
+        /* --- ESTILOS GERAIS E RESET  --- */
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #333;
+            background-color: #FDFDFD;
         }
 
-        header {
-            grid-column-start: 1;
-            grid-column-end: 12;
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px; /* Bordas suaves para as imagens */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.2rem); /* Tipografia fluida para os títulos */
+        }
+
+        /* --- SEÇÕES DE DESTAQUE --- */
+        .secao-colorida {
             background-color: #506E6A;
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
         }
 
-        .menu {
-            grid-column-start: 6;
-            grid-column-end: 12;
+        /* --- MENU DE NAVEGAÇÃO  --- */
+        .menu-nav {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-nav ul {
+            display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            /*centraliza o menu*/
-            gap: 20px;
+            gap: 1rem;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu-nav a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #506E6A;
+            color: #506E6A;
+            display: block;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav a:hover, .menu-nav a:focus {
+            background-color: #506E6A;
+            color: white;
+            outline: none;
+        }
+
+        /* --- CONTEÚDO PRINCIPAL  --- */
+        .container-conteudo {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .imagem_leo {
-            grid-column-start: 1;
-            grid-column-end: 3;
+            grid-column: 1 / span 4;
+            align-self: start;
+        }
+        
+        .infos {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            text-align: left;
         }
 
         .principal {
-            grid-column-start: 4;
-            grid-column-end: 12;
-            padding-left: 15px;
-            padding-right: 15px;
-            text-align: justify;
+            grid-column: 5 / -1;
         }
 
-        footer {
-            grid-column-start: 1;
-            grid-column-end: 12;
-            background-color: #506E6A;
-            color: white;
+        /* --- GALERIA DE OBRAS  --- */
+        .galeria-obras {
+            display: grid; /* Usamos Grid aqui também para um alinhamento */
+            
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem; /* Espaço entre os cards das obras */
+        }
+
+        .obra-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
-
-        }
-        .card {
-            display: flex;
-            flex-flow: row wrap;
-
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
         }
 
-        ul {
-            list-style-type: none;
-            color: #506E6A;
+        .obra-card img {
+            margin-bottom: 1rem;
+            border-radius: 4px;
         }
 
-        a,
-        a:link {
-            text-decoration: none;
-            padding: 8px 16px;
-            border: solid #506E6A 1px;
+        .obra-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
         }
 
-        li {
-            float: left;
+        .obra-card p {
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        a:hover {
-            background-color: #506E6A;
-            color: white;
-        }
-
-        .img {
-            border: 1px solid #ccc;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .img img {
-            width: 125px;
-            height: 115px;
-        }
-
-        @media all and (min-width: 35rem) {
-            body {
-                margin: 0 auto;
+        /* --- MEDIA QUERY --- */
+        @media only screen and (max-width: 800px) {
+            
+            .container-conteudo {
+                grid-template-columns: 1fr; /* Muda para UMA coluna */
+                padding: 1.5rem 1rem;
             }
 
-            /*.container {
-                max-width: 1200px;
-                margin: 0 auto;
-
-            }*/
-
-            .img {
-                max-width: 28rem;
-                margin: 1rem;
-            }
-        }
-
-        /* media query para dispositivos móveis */
-        @media only screen and (max-width: 767px) {
-            .wrapper {
-                grid-column-start: 1;
-                grid-column-end: 1;
-            }
-
-            .imagem_leo {
-                grid-column-start: 1;
-                grid-column-end: 1;
-            }
-
+            .imagem_leo,
             .principal {
-                grid-column-start: 1;
-                grid-column-end: 1;
+                grid-column: 1 / -1; /* Ambos os itens ocupam a única coluna */
             }
         }
     </style>
 </head>
 
 <body>
-    <header class="container">
-        <h1 style="color: white; text-align: center;">Biografia Leonardo da Vinci</h1>
-        <br>
+    <!-- A estrutura do Cabeçalho e Menu é a mesma -->
+    <header class="secao-colorida">
+        <h1>Obras de Leonardo da Vinci</h1>
     </header>
-    <nav class="container menu">
+
+    <nav class="menu-nav">
         <ul>
             <li><a href="index.html">Biografia</a></li>
             <li><a href="obras.html">Obras</a></li>
             <li><a href="curiosidades.html">Curiosidades</a></li>
         </ul>
     </nav>
-    <div class="container wrapper">
+
+   
+    <div class="container-conteudo">
+       
         <aside class="imagem_leo">
-            <img src="imagens/leonardo-da-vinci.png">
+            <img src="imagens/leonardo-da-vinci.png" alt="Retrato de Leonardo da Vinci">
             <div class="infos">
-                <p><strong>Ocupação</strong> Pintor italiano</p>
-                <p>
-                    <strong>Data do Nascimento</strong>
-                    15/04/1452
-                </p>
-                <p><strong>Data da Morte</strong>02/05/1519 (aos 67 anos)</p>
-                <br><br><br>
+                <p><strong>Ocupação:</strong> Pintor, inventor, cientista...</p>
+                <p><strong>Nascimento:</strong> 15 de Abril de 1452</p>
+                <p><strong>Morte:</strong> 02 de Maio de 1519 (aos 67 anos)</p>
             </div>
-
         </aside>
-        <section class=" principal">
-            <h1>
-                Obras
-            </h1>
-            <div class="card">
-                <div class="img">
-                    <img src="imagens/mona-lisa.png">
 
-                    <div class="">
-                        <h2>Mosalisa</h2>
-                        <p>Museu onde está o quadro</p>
-
-                    </div>
+        <!-- Galeria -->
+        <section class="principal">
+            <h2>Principais Obras</h2>
+            <div class="galeria-obras">
+                <!-- Card da Obra 1 -->
+                <div class="obra-card">
+                    <img src="imagens/mona-lisa.png" alt="Pintura Mona Lisa">
+                    <h3>Mona Lisa (La Gioconda)</h3>
+                    <p>Museu do Louvre, Paris</p>
                 </div>
 
-                <div class="img">
-                    <img src="imagens/salvator-mundi.png">
-
-                    <div class="">
-                        <h2>Salvator Mundi</h2>
-                        <p>Museu onde está o quadro</p>
-                    </div>
+                <!-- Card da Obra 2 -->
+                <div class="obra-card">
+                    <img src="imagens/a-ultima-ceia.png" alt="Pintura A Última Ceia">
+                    <h3>A Última Ceia</h3>
+                    <p>Santa Maria delle Grazie, Milão</p>
                 </div>
-                <div class="img">
-                    <img src="imagens/ginevra.pgn.jpeg">
 
-                    <div class="">
-                        <h2>Ginevra de' Benci</h2>
-                        <p>Museu onde está o quadro</p>
-                    </div>
+                <!-- Card da Obra 3 -->
+                <div class="obra-card">
+                    <img src="imagens/vitruvian-man.png" alt="Desenho Homem Vitruviano">
+                    <h3>Homem Vitruviano</h3>
+                    <p>Gallerie dell'Accademia, Veneza</p>
                 </div>
-                <div class="img">
-                    <img src="imagens/dona-arminho.png">
 
-                    <div class="">
-                        <h2>Dona com Arminho </h2>
-                        <p>Museu onde está o quadro</p>
-                    </div>
+                <!-- Card da Obra 4 -->
+                <div class="obra-card">
+                    <img src="imagens/dona-arminho.png" alt="Pintura Dama com Arminho">
+                    <h3>Dama com Arminho</h3>
+                    <p>Museu Nacional, Cracóvia</p>
+                </div>
+
+                 <!-- Card da Obra 5 -->
+                 <div class="obra-card">
+                    <img src="imagens/salvator-mundi.png" alt="Pintura Salvator Mundi">
+                    <h3>Salvator Mundi</h3>
+                    <p>Coleção particular</p>
+                </div>
+
+                 <!-- Card da Obra 6 -->
+                 <div class="obra-card">
+                    <img src="imagens/ginevra.png" alt="Pintura Ginevra de' Benci">
+                    <h3>Ginevra de' Benci</h3>
+                    <p>Galeria Nacional de Arte, Washington, D.C.</p>
                 </div>
             </div>
         </section>
     </div>
-    <footer class="container">
-        <h1> Desenvolvido para fins educacionais</h1>
+
+    <footer class="secao-colorida">
+        <p>Desenvolvido para fins educacionais</p>
     </footer>
-    </footer>
-    </div>
+
 </body>
 
 </html>
