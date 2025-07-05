@@ -1,193 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- A tag mais importante para o design responsivo. Ela diz ao navegador para usar a largura do dispositivo. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leonardo da Vinci</title>
+    <title>Leonardo da Vinci - Responsivo</title>
     <style>
+        /* --- ESTILOS GERAIS E RESET --- */
         body {
             margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif; /* Uma fonte mais clássica para o tema */
+            color: #333;
+            background-color: #FDFDFD;
         }
 
-        .container {
-            display: grid;
+        img {
+            max-width: 100%; /* Garante que as imagens nunca "vazem" do seu container */
+            height: auto;
+            display: block; /* Remove espaços extras que podem aparecer embaixo das imagens */
         }
 
-        header {
-            grid-column-start: 1;
-            grid-column-end: 12;
-            background-color: #506E6A;
+        h1, h2, h3 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .menu {
-            grid-column-start: 6;
-            grid-column-end: 12;
-            justify-content: center;/*centraliza o menu*/
-            gap: 20px;/*https://nekocalc.com/px-to-rem-converter*/
-        }
-
-
-        .imagem_leo {
-            grid-column-start: 1;
-            grid-column-end: 3;
-
-        }
-
-        .principal {
-            grid-column-start: 4;
-            grid-column-end: 12;
-            padding-left: 15px;
-            padding-right: 15px;
-            text-align: justify;
-
-        }
-
-        footer {
-            grid-column-start: 1;
-            grid-column-end: 12;
+        /* --- CONTAINER PRINCIPAL E CABEÇALHO/RODAPÉ --- */
+        /* Vamos unificar o estilo do cabeçalho e rodapé aqui */
+        .secao-colorida {
             background-color: #506E6A;
             color: white;
+            padding: 1rem;
             text-align: center;
         }
 
-        ul {
-            list-style-type: none;
-            color: #506E6A;
+        /* --- MENU DE NAVEGAÇÃO --- */
+        .menu-nav {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
         }
 
-        a,
-        a:link {
+        .menu-nav ul {
+            /* A MÁGICA DO FLEXBOX: Substituímos o 'float' antigo. */
+            display: flex;          /* Transforma a lista em um container flexível. */
+            flex-wrap: wrap;        /* Permite que os itens quebrem para a linha de baixo se não couberem. */
+            justify-content: center;/* Centraliza os itens do menu. */
+            gap: 1rem;              /* Cria um espaço consistente entre os itens. */
+            list-style-type: none;  /* Remove as bolinhas da lista. */
+            padding: 0;
+        }
+
+        .menu-nav a {
             text-decoration: none;
             padding: 8px 16px;
-            border: solid #506E6A 1px;
+            border: 1px solid #506E6A;
+            color: #506E6A;
+            display: block; /* Garante que o link ocupe todo o espaço do 'li' */
+            border-radius: 4px; /* Bordas arredondadas para um visual mais suave */
+            transition: all 0.3s ease; /* Efeito de transição suave */
         }
 
-        li {
-            float: left;
-        }
-
-        a:hover {
+        .menu-nav a:hover {
             background-color: #506E6A;
             color: white;
         }
 
-        /* media query para dispositivos móveis */
-        @media only screen and (max-width: 767px) {
-            .wrapper {
-                grid-column-start: 1;
-                grid-column-end: 1;
+        /* --- CONTEÚDO PRINCIPAL (A GRADE) --- */
+        .container-conteudo {
+            display: grid;
+            /* Definimos explicitamente uma grade de 12 colunas. Cada '1fr' é uma fração igual do espaço. */
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem; /* Espaço entre as colunas e linhas da grade. */
+            padding: 2rem;
+            max-width: 1200px; /* Limita a largura máxima em telas muito grandes para melhor leitura. */
+            margin: 0 auto;    /* Centraliza o container na página. */
+        }
 
+        .imagem_leo {
+            /* Em telas grandes, a imagem ocupa da coluna 1 até a 5. */
+            grid-column: 1 / span 4;
+            text-align: center; /* Centraliza o conteúdo dentro da coluna da imagem */
+        }
+        
+        .infos {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            text-align: left;
+        }
+
+        .infos p {
+            margin-bottom: 0.5rem;
+        }
+
+        .principal {
+            /* Em telas grandes, o texto ocupa da coluna 5 até a última (-1). */
+            grid-column: 5 / -1;
+            text-align: justify;
+            line-height: 1.7; /* Melhora a legibilidade do texto. */
+        }
+
+        /* --- A MÁGICA DA RESPONSIVIDADE --- */
+        /* Esta regra só se aplica a telas com largura MÁXIMA de 768px (tablets e celulares). */
+        @media only screen and (max-width: 768px) {
+            
+            .container-conteudo {
+                /* MUDANÇA CRÍTICA: A grade agora tem apenas UMA coluna. */
+                grid-template-columns: 1fr;
+                padding: 1rem; /* Diminui o espaçamento em telas menores */
             }
 
-            .imagem_leo {
-                grid-column-start: 1;
-                grid-column-end: 1;
-
-            }
-
+            .imagem_leo,
             .principal {
-                grid-column-start: 1;
-                grid-column-end: 1;
-
+                /* MUDANÇA CRÍTICA: Dizemos para ambos os itens ocuparem a grade inteira (a única coluna que existe). */
+                /* Isso faz com que eles se empilhem verticalmente. */
+                grid-column: 1 / -1;
             }
         }
     </style>
 </head>
 
 <body>
-    <header class="container">
-        <h1 style="color: white; text-align: center;">Biografia Leonardo da Vinci</h1>
-        <br>
-
+    <header class="secao-colorida">
+        <h1>Biografia: Leonardo da Vinci</h1>
     </header>
-    <nav class="container menu">
+
+    <nav class="menu-nav">
         <ul>
             <li><a href="index.html">Biografia</a></li>
             <li><a href="obras.html">Obras</a></li>
             <li><a href="curiosidades.html">Curiosidades</a></li>
         </ul>
     </nav>
-    <div class="container wrapper">
-        <aside class="imagem_leo">
-            <img src="imagens/leonardo-da-vinci.png">
-            <div class="infos">
-                <p><strong>Ocupação</strong> Pintor italiano</p>
-                <p>
-                    <strong>Data do Nascimento</strong>
-                    15/04/1452
-                </p>
-                <p><strong>Data da Morte</strong> 02/05/1519 (aos 67 anos)</p>
-            </div>
 
+    <!-- O container principal que usa a nossa grade (Grid) -->
+    <div class="container-conteudo">
+        <aside class="imagem_leo">
+            <img src="https://placehold.co/400x480/cccccc/333333?text=Da+Vinci" alt="Retrato de Leonardo da Vinci">
+            <div class="infos">
+                <p><strong>Ocupação:</strong> Pintor, inventor, cientista...</p>
+                <p><strong>Nascimento:</strong> 15 de Abril de 1452</p>
+                <p><strong>Morte:</strong> 02 de Maio de 1519 (aos 67 anos)</p>
+            </div>
         </aside>
+
         <section class="principal">
-            <h1>
-                Leonardo da Vinci
-            </h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi repellat sequi sapiente nemo deserunt non
-                fugiat, accusamus voluptatum quasi dolorum commodi unde temporibus beatae facilis voluptate odit veniam
-                id
-                ducimus veritatis ex? Accusantium, delectus provident, nesciunt natus esse, neque labore nobis fugiat
-                reprehenderit quam eum ipsa consequuntur est. Distinctio aliquam pariatur corporis numquam in architecto
-                dicta quis exercitationem necessitatibus, repellat ex ipsa commodi soluta! Porro, qui odit? Dignissimos
-                nulla sed laudantium saepe adipisci quia. Reprehenderit, odio. Dolorem, perspiciatis. Quidem recusandae
-                optio officiis ducimus dolore architecto, ut sed enim unde, illum rerum vero ad vel labore saepe
-                quisquam?
-                Saepe sit, nihil ad asperiores eaque culpa, quae suscipit neque dolorum non quasi veritatis quisquam
-                minima
-                qui possimus vero sint nam architecto earum voluptatibus pariatur labore porro. Quod sed rerum iure
-                harum
-                quos eveniet, molestias explicabo corporis officia eos libero autem? Vel, minima blanditiis sapiente
-                officia
-                repudiandae, nam distinctio tempore consequatur culpa maiores facilis a modi dolorem saepe, commodi
-                aliquam.
-                Voluptatem suscipit, earum consequuntur dolores debitis maiores incidunt soluta alias nihil ratione? Ab
-                facere natus, doloremque hic consectetur commodi nobis veritatis beatae incidunt totam pariatur eius
-                assumenda odit molestias deleniti ratione vitae ullam cupiditate officiis obcaecati suscipit aut
-                nostrum.
-                Sit maxime adipisci dignissimos.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi repellat sequi sapiente nemo
-                deserunt non fugiat, accusamus voluptatum quasi dolorum commodi unde temporibus beatae facilis
-                voluptate odit veniam id ducimus veritatis ex? Accusantium, delectus provident, nesciunt natus
-                esse, neque labore nobis fugiat reprehenderit quam eum ipsa consequuntur est. Distinctio
-                aliquam pariatur corporis numquam in architecto dicta quis exercitationem necessitatibus,
-                repellat ex ipsa commodi soluta! Porro, qui odit? Dignissimos nulla sed laudantium saepe
-                adipisci quia. Reprehenderit, odio. Dolorem, perspiciatis. Quidem recusandae optio officiis
-                ducimus dolore architecto, ut sed enim unde, illum rerum vero ad vel labore saepe quisquam?
-                Saepe sit, nihil ad asperiores eaque culpa, quae suscipit neque dolorum non quasi veritatis
-                quisquam minima qui possimus vero sint nam architecto earum voluptatibus pariatur labore
-                porro. Quod sed rerum iure harum quos eveniet, molestias explicabo corporis officia eos libero
-                autem? Vel, minima blanditiis sapiente officia repudiandae, nam distinctio tempore consequatur
-                culpa maiores facilis a modi dolorem saepe, commodi aliquam. Voluptatem suscipit, earum
-                consequuntur dolores debitis maiores incidunt soluta alias nihil ratione? Ab facere natus,
-                doloremque hic consectetur commodi nobis veritatis beatae incidunt totam pariatur eius
-                assumenda odit molestias deleniti ratione vitae ullam cupiditate officiis obcaecati suscipit
-                aut nostrum. Sit maxime adipisci dignissimos.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi repellat sequi sapiente nemo
-                deserunt non fugiat, accusamus voluptatum quasi dolorum commodi unde temporibus beatae facilis
-                voluptate odit veniam id ducimus veritatis ex? Accusantium, delectus provident, nesciunt natus
-                esse, neque labore nobis fugiat reprehenderit quam eum ipsa consequuntur est. Distinctio
-                aliquam pariatur corporis numquam in architecto dicta quis exercitationem necessitatibus,
-                repellat ex ipsa commodi soluta! Porro, qui odit? Dignissimos nulla sed laudantium saepe
-                adipisci quia. Reprehenderit, odio. Dolorem, perspiciatis. Quidem recusandae optio officiis
-                ducimus dolore architecto, ut sed enim unde, illum rerum vero ad vel labore saepe quisquam?
-                Saepe sit, nihil ad asperiores eaque culpa, quae suscipit neque dolorum non quasi veritatis
-                quisquam minima qui possimus vero sint nam architecto earum voluptatibus pariatur labore
-                porro. Quod sed rerum iure harum quos eveniet, molestias explicabo corporis officia eos libero
-                autem? Vel, minima blanditiis sapiente officia repudiandae, nam distinctio tempore consequatur
-                culpa maiores facilis a modi dolorem saepe, commodi aliquam. Voluptatem suscipit, earum
-                consequuntur dolores debitis maiores incidunt soluta alias nihil ratione? Ab facere natus,
-                doloremque hic consectetur commodi nobis veritatis beatae incidunt totam pariatur eius
-                assumenda odit molestias deleniti ratione vitae ullam cupiditate officiis obcaecati suscipit
-                aut nostrum. Sit maxime adipisci dignissimos.</p>
+            <h2>Leonardo da Vinci</h2>
+            <p>Leonardo di ser Piero da Vinci, ou simplesmente Leonardo da Vinci, foi um polímata italiano, uma das figuras mais importantes do Alto Renascimento, que se destacou como cientista, matemático, engenheiro, inventor, anatomista, pintor, escultor, arquiteto, botânico, poeta e músico. É ainda conhecido como o precursor da aviação e da balística.</p>
+            <p>Nascido na pequena aldeia de Vinci, perto de Florença, era filho ilegítimo de um notário e de uma camponesa. Desde cedo, demonstrou uma curiosidade insaciável e um talento extraordinário para as artes. Foi aprendiz no ateliê de Andrea del Verrocchio, um dos mais conceituados artistas de Florença, onde aprendeu não apenas a pintar e a esculpir, mas também os fundamentos da metalurgia, da mecânica e da química.</p>
+            <p>Suas obras mais famosas, como a "Mona Lisa" e "A Última Ceia", são ícones da cultura ocidental. No entanto, sua genialidade ia muito além da pintura. Seus cadernos de anotações, com mais de 13.000 páginas, revelam um gênio que investigou praticamente todos os campos do conhecimento humano. Ele projetou máquinas voadoras, tanques de guerra, submarinos e pontes giratórias, séculos antes de se tornarem realidade. Seus estudos sobre anatomia humana, baseados na dissecação de cadáveres, eram de uma precisão impressionante para a época e lançaram as bases para a medicina moderna.</p>
         </section>
     </div>
-    <footer class="container">
-        <h1>Desenvolvido para fins educacionais</h1>
+
+    <footer class="secao-colorida">
+        <p>Desenvolvido para fins educacionais</p>
     </footer>
-    </div>
+
 </body>
 
 </html>
